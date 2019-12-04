@@ -15,14 +15,14 @@ public class Scania extends LargeVehichles {
         truckBedGradient = 0;
     }
 
-    public boolean raiseTruckBed(double amount) {
+    public boolean lowerTruckBed(double amount) {
         if(truckBedGradient + amount > MAX_GRADIENT || getCurrentSpeed() > 0.1){
             return false;
         }
         truckBedGradient += amount;
         return true;
     }
-    public boolean lowerTruckBed(double amount){
+    public boolean raiseTruckBed(double amount){
         if(truckBedGradient - amount < MIN_GRADIENT){
             return false;
         }

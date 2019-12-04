@@ -18,8 +18,6 @@ public class DrawPanel extends JPanel{
     BufferedImage scaniaImage;
 
     HashMap<AbstractVehicle, BufferedImage> images;
-    // To keep track of a singel cars position
-    Point volvoPoint = new Point();
 
     // TODO: Make this genereal for all cars
     void moveit(HashMap<AbstractVehicle, BufferedImage> vehicles) {

@@ -22,9 +22,9 @@ public class CarController {
     private Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    private CarView frame;
     // A list of cars, modify if needed
-    HashMap<AbstractVehicle, BufferedImage> vehicles = new HashMap<>();
+    private HashMap<AbstractVehicle, BufferedImage> vehicles = new HashMap<>();
 
     //methods:
 
@@ -39,8 +39,6 @@ public class CarController {
 
         // Start a new view and send a reference of self
         cc.frame = frame;
-
-
 
         // Start the timer
         cc.timer.start();
@@ -73,9 +71,7 @@ public class CarController {
         BufferedImage carImage = carSet.getValue();
 
         if ((!(car.getCurrentXCoordinate() + carImage.getWidth() > frame.drawPanel.getWidth()) && !(car.getCurrentXCoordinate() < 0))) {
-            if ((!(car.getCurrentYCoordinate() + carImage.getHeight() > frame.drawPanel.getHeight()) && !(car.getCurrentYCoordinate() < 0))) {
-                return true;
-            }
+            return (!(car.getCurrentYCoordinate() + carImage.getHeight() > frame.drawPanel.getHeight()) && !(car.getCurrentYCoordinate() < 0));
         }
 
         return false;
