@@ -121,4 +121,7 @@ public abstract class AbstractVehicle extends AbstractMoveable {
         return enginePower;
     }
 
+    public String getModelName() {
+        return modelName;
+    }
 }
