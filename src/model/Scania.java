@@ -2,7 +2,7 @@ package model;
 
 import java.awt.*;
 
-class Scania extends LargeVehichles implements IFlatBed {
+class Scania extends LargeVehichles implements IGradientFlatBed {
 
     /**
      * model.FlatBed delegation.

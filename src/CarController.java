@@ -10,6 +10,10 @@ public class CarController {
     CarView view;
     CarModel model;
 
+    public CarController() {
+        this.model = new CarModel();
+    }
+
     public void start() {
         model.startTimer();
     }
@@ -21,11 +25,6 @@ public class CarController {
         // Start a new view and send a reference of self
         CarView view = new CarView("CarSim 1.0", cc);
         cc.view = view;
-
-        // Setup the model
-        CarModel model = new CarModel();
-        model.addObserver(view.drawPanel);
-        cc.model = model;
 
         // Start the timer
         cc.start();
@@ -76,16 +75,16 @@ public class CarController {
 
     void scaniaLiftBed() {
         for (IVehicle vehicle : model.vehicles) {
-            if (vehicle instanceof IFlatBed) {
-                ((IFlatBed) vehicle).raiseBed(5);
+            if (vehicle instanceof IGradientFlatBed) {
+                ((IGradientFlatBed) vehicle).raiseBed(5);
             }
         }
     }
 
     void scaniaLowerBed() {
         for (IVehicle vehicle : model.vehicles) {
-            if (vehicle instanceof IFlatBed) {
-                ((IFlatBed) vehicle).lowerBed(5);
+            if (vehicle instanceof IGradientFlatBed) {
+                ((IGradientFlatBed) vehicle).lowerBed(5);
             }
         }
     }

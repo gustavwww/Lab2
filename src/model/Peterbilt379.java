@@ -2,7 +2,7 @@ package model;
 
 import java.awt.*;
 
-class Peterbilt379 extends LargeVehichles implements ICarry<Car> {
+class Peterbilt379 extends LargeVehichles implements ICarry<Car>, IFlatBed {
 
     /**
      * model.Flatbed delegation.
