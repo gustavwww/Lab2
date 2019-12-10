@@ -2,23 +2,24 @@ package model;
 
 import java.awt.*;
 
-class Ferry extends LargeVehichles {
+class Ferry extends LargeVehichles implements ICarry<Car> {
 
+    /**
+     * model.FlatBed delegation.
+     */
+    private final FlatBed flatBed;
     /**
      * model.Carry delegation.
      */
-    private Carry parent;
-    /**
-     * The state of the ramp.
-     */
-    private boolean rampDown = false;
+    private final Carry<Car> carry;
 
     /**
      * Constructor for ferry.
      */
     Ferry(int x, int y) {
         super(x, y, 300000, 900, 400, 30000, Color.GREEN, "Friesland");
-        this.parent = new Carry(300, 600);
+        this.carry = new Carry<>(this, 300, 600);
+        this.flatBed = new FlatBed();
     }
 
     /**
@@ -26,31 +27,26 @@ class Ferry extends LargeVehichles {
      * @return Returns true if successful.
      */
     public boolean lowerRamp(){
-        if(getCurrentSpeed() > 0.1){
-            return false;
-        }
-        rampDown = true;
-        return true;
+        return flatBed.lowerBed(getCurrentSpeed());
     }
 
     /**
      * Raises the ramp.
      */
     public void raiseRamp(){
-        rampDown = false;
+        flatBed.raiseBed();
     }
 
     /**
      * Unloads the first car that entered the ferry.
-     * @return Returns true if successful.
+     * @return Returns the unloaded Car.
      */
-    public boolean unloadCar() {
-        if (!rampDown) {
-            return false;
+    @Override
+    public Car unload() {
+        if (!flatBed.isBedDown()) {
+            throw new IllegalCallerException();
         }
-        parent.unloadLastObject(this, new Point(-10,-10));
-        return true;
-
+        return carry.unloadLastObject(new Point(-10,-10));
     }
 
     /**
@@ -58,27 +54,24 @@ class Ferry extends LargeVehichles {
      * @param car The car to load.
      * @return Returns true if successful.
      */
-    public boolean loadCar(Car car) {
-        if (!rampDown) {
+    @Override
+    public boolean load(Car car) {
+        if (!flatBed.isBedDown()) {
             return false;
         }
-        parent.loadObject(this, car);
-        return true;
+        return carry.loadObject(car);
     }
 
     @Override
     public boolean gas(double amount){
-        if(rampDown){return false;}
+        if(flatBed.isBedDown()){return false;}
         return super.gas(amount);
     }
 
     @Override
     public void move(){
-
         super.move();
-        for(AbstractPositionable object: parent.objects){
-            parent.updateObjectLocation(object, this, new Point(0,0));
-        }
+        carry.updateAllObjectsLocation();
     }
 
     @Override
@@ -87,7 +80,7 @@ class Ferry extends LargeVehichles {
     }
 
     public boolean isRampDown() {
-        return rampDown;
+        return flatBed.isBedDown();
     }
 
 }

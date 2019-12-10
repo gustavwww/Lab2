@@ -2,40 +2,36 @@ package model;
 
 import java.awt.*;
 
-class Peterbilt379 extends LargeVehichles implements IFlatBed {
+class Peterbilt379 extends LargeVehichles implements ICarry<Car> {
 
-
-    private FlatBed flatBed;
+    /**
+     * model.Flatbed delegation.
+     */
+    private final FlatBed flatBed;
     /**
      * model.Carry delegation.
      */
-    private Carry carry;
-    /**
-     * The state of the ramp.
-     */
-    private boolean rampDown;
+    private final Carry<Car> carry;
 
     /**
      * The constructor for model.Peterbilt379
      */
     Peterbilt379(int x, int y) {
         super(x, y, 100, 60, 2, 140, Color.red, "ScaniaTekno");
-        this.carry = new Carry(6, 480);
+        this.carry = new Carry<>(this, 6, 480);
         this.flatBed = new FlatBed();
-        rampDown = false;
     }
 
     /**
      * Unloads the last car that entered the ferry.
      * @return Returns true if successful.
      */
-    public boolean unloadCar() {
-        if (!rampDown) {
-            return false;
+    @Override
+    public Car unload() {
+        if (!flatBed.isBedDown()) {
+            throw new IllegalCallerException();
         }
-        carry.unloadFirstObject(this, new Point(-10,-10));
-        return true;
-
+        return carry.unloadFirstObject(new Point(-10,-10));
     }
 
     /**
@@ -43,34 +39,37 @@ class Peterbilt379 extends LargeVehichles implements IFlatBed {
      * @param car The car to load.
      * @return Returns true if successful.
      */
-    public boolean loadCar(Car car) {
-        if (!rampDown) {
+    @Override
+    public boolean load(Car car) {
+        if (!flatBed.isBedDown()) {
             return false;
         }
-        carry.loadObject(this, car);
+        carry.loadObject(car);
         return true;
+    }
+
+    @Override
+    public void move() {
+        super.move();
+        carry.updateAllObjectsLocation();
     }
 
     /**
      * Lowers the ramp.
      * @return Returns true if successful.
      */
-    public boolean lowerRamp(){
-        if(getCurrentSpeed() > 0.1) {
-            return false;
-        }
-        rampDown = true;
-        return true;
+    public boolean lowerRamp() {
+        return flatBed.lowerBed(getCurrentSpeed());
     }
 
     /**
      * Raises the ramp.
      */
-    public void raiseRamp(){
-        rampDown = false;
+    public void raiseRamp() {
+        flatBed.raiseBed();
     }
 
     public boolean isRampDown() {
-        return rampDown;
+        return flatBed.isBedDown();
     }
 }

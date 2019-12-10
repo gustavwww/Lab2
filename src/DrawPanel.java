@@ -1,4 +1,5 @@
-import model.AbstractVehicle;
+
+import model.IVehicle;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -7,15 +8,16 @@ import javax.swing.*;
 
 // This panel represent the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel{
+public class DrawPanel extends JPanel implements ModelListener {
+
+    private final CarController carC;
 
     private final Assets assets;
-    private final List<AbstractVehicle> vehicles;
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+    public DrawPanel(int x, int y, CarController carC) {
         this.assets = new Assets();
-        this.vehicles = new ArrayList<>();
+        this.carC = new CarController();
 
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
@@ -23,16 +25,36 @@ public class DrawPanel extends JPanel{
 
     }
 
+    @Override
+    public void didUpdate() {
+        checkVehiclesInFrame();
+        repaint();
+    }
 
-    // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (AbstractVehicle vehicle : vehicles) {
+        for (IVehicle vehicle : carC.model.vehicles) {
             g.drawImage(assets.getImageByCar(vehicle.getModelName()), (int) Math.round(vehicle.getCurrentXCoordinate()), (int) Math.round(vehicle.getCurrentYCoordinate()), null);
         }
 
     }
+
+    private void checkVehiclesInFrame() {
+        for (IVehicle vehicle : carC.model.vehicles) {
+            if (!isVehicleInFrame(vehicle)) {
+                carC.vehicleOutOfBounds(vehicle);
+            }
+        }
+    }
+
+    private boolean isVehicleInFrame(IVehicle vehicle) {
+        if ((!(vehicle.getCurrentXCoordinate() + vehicle.getLength() > getWidth()) && !(vehicle.getCurrentXCoordinate() < 0))) {
+            return (!(vehicle.getCurrentYCoordinate() + vehicle.getWidth() > getHeight()) && !(vehicle.getCurrentYCoordinate() < 0));
+        }
+        return false;
+    }
+
+
 }

@@ -4,6 +4,9 @@ import java.awt.*;
 
 class Scania extends LargeVehichles implements IFlatBed {
 
+    /**
+     * model.FlatBed delegation.
+     */
     private FlatBed flatBed;
 
     /**
@@ -14,9 +17,20 @@ class Scania extends LargeVehichles implements IFlatBed {
         this.flatBed = new FlatBed();
     }
 
+    /**
+     * Lower the trucks Flatbed.
+     * @param amount The angle with which the bed will be lowered. Higher angle, lower bed.
+     * @return  Returns whether the action was a success or not.
+     */
     public boolean lowerBed(double amount) {
         return flatBed.lowerBed(amount, getCurrentSpeed());
     }
+
+    /**
+     * Raise the trucks Flatbed.
+     * @param amount The angle with which the bed will be raised. Higher angle, lower bed.
+     * @return  Returns whether the action was a success or not.
+     */
     public boolean raiseBed(double amount) {
         return flatBed.raiseBed(amount);
     }
