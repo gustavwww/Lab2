@@ -1,11 +1,11 @@
-import java.awt.*;
-import java.util.ArrayDeque;
-import java.util.Deque;
+package model;
 
-public class Ferry extends LargeVehichles {
+import java.awt.*;
+
+class Ferry extends LargeVehichles {
 
     /**
-     * Carry delegation.
+     * model.Carry delegation.
      */
     private Carry parent;
     /**
@@ -16,8 +16,8 @@ public class Ferry extends LargeVehichles {
     /**
      * Constructor for ferry.
      */
-    public Ferry(int x, int y) {
-        super(x, y, 300000, 400, 30000, Color.GREEN, "Friesland");
+    Ferry(int x, int y) {
+        super(x, y, 300000, 900, 400, 30000, Color.GREEN, "Friesland");
         this.parent = new Carry(300, 600);
     }
 

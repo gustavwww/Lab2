@@ -1,23 +1,27 @@
+package model;
+
 import java.awt.*;
-import java.util.Stack;
 
-public class Peterbilt379 extends LargeVehichles {
+class Peterbilt379 extends LargeVehichles implements IFlatBed {
 
+
+    private FlatBed flatBed;
     /**
-     * Carry delegation.
+     * model.Carry delegation.
      */
-    private Carry parent;
+    private Carry carry;
     /**
      * The state of the ramp.
      */
     private boolean rampDown;
 
     /**
-     * The constructor for Peterbilt379
+     * The constructor for model.Peterbilt379
      */
-    public Peterbilt379(int x, int y) {
-        super(x, y, 460,2, 140, Color.red, "ScaniaTekno");
-        this.parent = new Carry(6, 480);
+    Peterbilt379(int x, int y) {
+        super(x, y, 100, 60, 2, 140, Color.red, "ScaniaTekno");
+        this.carry = new Carry(6, 480);
+        this.flatBed = new FlatBed();
         rampDown = false;
     }
 
@@ -29,13 +33,13 @@ public class Peterbilt379 extends LargeVehichles {
         if (!rampDown) {
             return false;
         }
-        parent.unloadFirstObject(this, new Point(-10,-10));
+        carry.unloadFirstObject(this, new Point(-10,-10));
         return true;
 
     }
 
     /**
-     * Loads a car into the Peterbilt379.
+     * Loads a car into the model.Peterbilt379.
      * @param car The car to load.
      * @return Returns true if successful.
      */
@@ -43,7 +47,7 @@ public class Peterbilt379 extends LargeVehichles {
         if (!rampDown) {
             return false;
         }
-        parent.loadObject(this, car);
+        carry.loadObject(this, car);
         return true;
     }
 
@@ -52,7 +56,7 @@ public class Peterbilt379 extends LargeVehichles {
      * @return Returns true if successful.
      */
     public boolean lowerRamp(){
-        if(getCurrentSpeed() > 0.1){
+        if(getCurrentSpeed() > 0.1) {
             return false;
         }
         rampDown = true;

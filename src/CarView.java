@@ -22,22 +22,7 @@ public class CarView extends JFrame{
 
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
-    JPanel controlPanel = new JPanel();
-
-    JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
-    JLabel gasLabel = new JLabel("Amount of gas");
-
-    JButton gasButton = new JButton("Gas");
-    JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Raise Bed");
-    JButton lowerBedButton = new JButton("Scania Lower Bed");
-
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
+    private int gasAmount = 0;
 
     // Constructor
     public CarView(String framename, CarController cc){
@@ -49,6 +34,23 @@ public class CarView extends JFrame{
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
     private void initComponents(String title) {
+
+        JPanel controlPanel = new JPanel();
+
+        JPanel gasPanel = new JPanel();
+        JSpinner gasSpinner;
+
+        JLabel gasLabel = new JLabel("Amount of gas");
+
+        JButton gasButton = new JButton("Gas");
+        JButton brakeButton = new JButton("Brake");
+        JButton turboOnButton = new JButton("Saab Turbo on");
+        JButton turboOffButton = new JButton("Saab Turbo off");
+        JButton liftBedButton = new JButton("model.Scania Raise Bed");
+        JButton lowerBedButton = new JButton("model.Scania Lower Bed");
+
+        JButton startButton = new JButton("Start all cars");
+        JButton stopButton = new JButton("Stop all cars");
 
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X,Y));

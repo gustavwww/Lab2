@@ -1,8 +1,8 @@
+package model;
 
+class Garage_Volvo240 extends AbstractGarage<Volvo240> {
 
-public class Garage_Volvo240 extends AbstractGarage<Volvo240> {
-
-    public Garage_Volvo240(int maxCars) {
+    Garage_Volvo240(int maxCars) {
         super(maxCars);
     }
 

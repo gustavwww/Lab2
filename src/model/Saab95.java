@@ -1,6 +1,8 @@
+package model;
+
 import java.awt.*;
 
-public class Saab95 extends Car {
+class Saab95 extends Car implements ITurbo {
 
     /**
      * The current state of the turbo
@@ -8,10 +10,10 @@ public class Saab95 extends Car {
     private boolean turboOn;
 
     /**
-     * Constructor for Saab95
+     * Constructor for model.Saab95
      */
-    public Saab95(int x, int y) {
-        super(x, y, 450,2, 125, Color.BLACK, "Saab95");
+    Saab95(int x, int y) {
+        super(x, y, 100, 60, 2, 125, Color.BLACK, "model.Saab95");
         this.turboOn = false;
     }
 
@@ -26,8 +28,9 @@ public class Saab95 extends Car {
      * Turn the turbo off
      */
     public void setTurboOff() { turboOn = false; }
-    @Override
 
+
+    @Override
     protected double speedFactor() {
         double turbo = 1;
         if (turboOn) turbo = 1.3;

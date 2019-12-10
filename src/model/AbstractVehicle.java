@@ -1,6 +1,8 @@
+package model;
+
 import java.awt.*;
 
-public abstract class AbstractVehicle extends AbstractMoveable {
+abstract class AbstractVehicle extends AbstractMoveable implements IVehicle {
 
     /**
      * Number of doors
@@ -11,7 +13,7 @@ public abstract class AbstractVehicle extends AbstractMoveable {
      */
     private final double enginePower;
     /**
-     * Car's colour.
+     * model.Car's colour.
      */
     private Color color;
     /**
@@ -25,14 +27,13 @@ public abstract class AbstractVehicle extends AbstractMoveable {
     private boolean engineRunning;
 
     /**
-     * @param length
      * @param nDoors         Number of doors
      * @param enginePower    Power of engine in horsepower
-     * @param color          Car's colour
+     * @param color          model.Car's colour
      * @param modelName      The model of the car
      */
-    public AbstractVehicle(int x, int y, int length, int nDoors, double enginePower, Color color, String modelName) {
-        super(x, y, length);
+    AbstractVehicle(int x, int y, int length, int width, int nDoors, double enginePower, Color color, String modelName) {
+        super(x, y, length, width);
         this.nDoors = nDoors;
         this.enginePower = enginePower;
         this.color = color;

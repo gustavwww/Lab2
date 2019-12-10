@@ -1,6 +1,8 @@
+package model;
+
 import java.awt.*;
 
-public interface ICarry {
+interface ICarry {
     /**
      * Loads an object into the current carrier object.
      * @param carrier Current carrier object.

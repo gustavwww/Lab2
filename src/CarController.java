@@ -1,10 +1,11 @@
+import model.*;
+
+import javax.management.InvalidAttributeValueException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -24,7 +25,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     private CarView frame;
     // A list of cars, modify if needed
-    private HashMap<AbstractVehicle, BufferedImage> vehicles = new HashMap<>();
+    private final List<IVehicle> vehicles = new ArrayList<>();
 
     //methods:
 
@@ -33,9 +34,9 @@ public class CarController {
         CarController cc = new CarController();
         CarView frame = new CarView("CarSim 1.0", cc);
 
-        cc.vehicles.put(new Volvo240(100, 100), frame.drawPanel.volvoImage);
-        cc.vehicles.put(new Saab95(100, 200), frame.drawPanel.saabImage);
-        cc.vehicles.put(new Scania(100, 300), frame.drawPanel.scaniaImage);
+        cc.vehicles.add(VehicleFactory.createVolvo240(100, 100));
+        cc.vehicles.add(VehicleFactory.createSaab95(100, 200));
+        cc.vehicles.add(VehicleFactory.createScania(100, 300));
 
         // Start a new view and send a reference of self
         cc.frame = frame;
@@ -49,29 +50,25 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Map.Entry<AbstractVehicle, BufferedImage> carSet : vehicles.entrySet()) {
-                carSet.getKey().move();
-                changeDirection(carSet);
-                frame.drawPanel.moveit(vehicles);
+            for (IVehicle vehicle : vehicles) {
+                vehicle.move();
+                changeDirection(vehicle);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
         }
     }
 
-    private void changeDirection(Map.Entry<AbstractVehicle, BufferedImage> carSet) {
-        if (!isVehicleInFrame(carSet)) {
-            carSet.getKey().turn180();
+    private void changeDirection(IVehicle vehicle) {
+        if (!isVehicleInFrame(vehicle)) {
+            vehicle.turn180();
         }
     }
 
-    private boolean isVehicleInFrame(Map.Entry<AbstractVehicle, BufferedImage> carSet) {
+    private boolean isVehicleInFrame(IVehicle vehicle) {
 
-        AbstractVehicle car = carSet.getKey();
-        BufferedImage carImage = carSet.getValue();
-
-        if ((!(car.getCurrentXCoordinate() + carImage.getWidth() > frame.drawPanel.getWidth()) && !(car.getCurrentXCoordinate() < 0))) {
-            return (!(car.getCurrentYCoordinate() + carImage.getHeight() > frame.drawPanel.getHeight()) && !(car.getCurrentYCoordinate() < 0));
+        if ((!(vehicle.getCurrentXCoordinate() + vehicle.getLength() > frame.drawPanel.getWidth()) && !(vehicle.getCurrentXCoordinate() < 0))) {
+            return (!(vehicle.getCurrentYCoordinate() + vehicle.getWidth() > frame.drawPanel.getHeight()) && !(vehicle.getCurrentYCoordinate() < 0));
         }
 
         return false;
@@ -80,58 +77,58 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (AbstractVehicle vehicle : vehicles.keySet()) {
+        for (IVehicle vehicle : vehicles) {
             vehicle.gas(gas);
         }
     }
 
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (AbstractVehicle vehicle : vehicles.keySet()) {
+        for (IVehicle vehicle : vehicles) {
             vehicle.brake(brake);
         }
     }
 
     void startAllCars() {
-        for (AbstractVehicle vehicle : vehicles.keySet()) {
+        for (IVehicle vehicle : vehicles) {
             vehicle.startEngine();
         }
     }
 
     void stopAllCars() {
-        for (AbstractVehicle vehicle : vehicles.keySet()) {
+        for (IVehicle vehicle : vehicles) {
             vehicle.stopEngine();
         }
     }
 
     void saabTurboOn() {
-        for (AbstractVehicle vehicle : vehicles.keySet()) {
-            if (vehicle instanceof Saab95) {
-                ((Saab95) vehicle).setTurboOn();
+        for (IVehicle vehicle : vehicles) {
+            if (vehicle instanceof ITurbo) {
+                ((ITurbo) vehicle).setTurboOn();
             }
         }
     }
 
     void saabTurboOff() {
-        for (AbstractVehicle vehicle : vehicles.keySet()) {
-            if (vehicle instanceof Saab95) {
-                ((Saab95) vehicle).setTurboOff();
+        for (IVehicle vehicle : vehicles) {
+            if (vehicle instanceof ITurbo) {
+                ((ITurbo) vehicle).setTurboOff();
             }
         }
     }
 
     void scaniaLiftBed() {
-        for (AbstractVehicle vehicle : vehicles.keySet()) {
-            if (vehicle instanceof Scania) {
-                ((Scania) vehicle).raiseTruckBed(5);
+        for (IVehicle vehicle : vehicles) {
+            if (vehicle instanceof IFlatBed) {
+                ((IFlatBed) vehicle).raiseBed(5);
             }
         }
     }
 
     void scaniaLowerBed() {
-        for (AbstractVehicle vehicle : vehicles.keySet()) {
-            if (vehicle instanceof Scania) {
-                ((Scania) vehicle).lowerTruckBed(5);
+        for (IVehicle vehicle : vehicles) {
+            if (vehicle instanceof IFlatBed) {
+                ((IFlatBed) vehicle).lowerBed(5);
             }
         }
     }

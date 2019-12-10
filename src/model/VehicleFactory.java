@@ -1,0 +1,19 @@
+package model;
+
+public class VehicleFactory {
+
+    private VehicleFactory() {}
+
+    public static IVehicle createVolvo240(int x, int y) {
+        return new Volvo240(x, y);
+    }
+
+    public static IVehicle createSaab95(int x, int y) {
+        return new Saab95(x, y);
+    }
+
+    public static IVehicle createScania(int x, int y) {
+        return new Scania(x, y);
+    }
+
+}

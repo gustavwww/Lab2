@@ -1,4 +1,6 @@
-public interface IPositionable {
+package model;
+
+interface IPositionable {
 
     /**
      * @return The objects current x coordinate
@@ -14,5 +16,10 @@ public interface IPositionable {
      * @return The length of the object
      */
     int getLength();
+
+    /**
+     * @return The width of the object
+     */
+    int getWidth();
 
 }

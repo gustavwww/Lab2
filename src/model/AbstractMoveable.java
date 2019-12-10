@@ -1,4 +1,6 @@
-public class AbstractMoveable extends AbstractPositionable implements IMoveable {
+package model;
+
+abstract class AbstractMoveable extends AbstractPositionable implements IMoveable {
 
 
     /**
@@ -15,11 +17,9 @@ public class AbstractMoveable extends AbstractPositionable implements IMoveable 
      */
     private int direction = 2;
 
-    /**
-     * @param length
-     */
-    public AbstractMoveable(int x, int y, int length) {
-        super(x, y, length);
+
+    AbstractMoveable(int x, int y, int length, int width) {
+        super(x, y, length, width);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class AbstractMoveable extends AbstractPositionable implements IMoveable 
      * Sets the current speed of the object
      * @param currentSpeed The current speed
      */
-    protected void setCurrentSpeed(double currentSpeed) {
+    void setCurrentSpeed(double currentSpeed) {
         this.currentSpeed = currentSpeed;
     }
 

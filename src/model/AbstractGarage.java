@@ -1,11 +1,13 @@
+package model;
+
 import java.util.ArrayList;
 
-public abstract class AbstractGarage <A extends Car>{
+abstract class AbstractGarage<A extends Car> {
 
     private final int maxCars;
     private final ArrayList<A> cars;
 
-    public AbstractGarage(int maxCars) {
+    AbstractGarage(int maxCars) {
         this.maxCars = maxCars;
         cars = new ArrayList<A>();
     }

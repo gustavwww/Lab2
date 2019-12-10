@@ -1,7 +1,8 @@
+package model;
 
-public class Garage_Saab95 extends AbstractGarage<Saab95> {
+class Garage_Saab95 extends AbstractGarage<Saab95> {
 
-    public Garage_Saab95(int maxCars) {
+    Garage_Saab95(int maxCars) {
         super(maxCars);
     }
 

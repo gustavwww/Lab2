@@ -1,11 +1,13 @@
-import java.awt.*;
+package model;
 
-public abstract class AbstractPositionable implements IPositionable {
+abstract class AbstractPositionable implements IPositionable {
 
     /**
      * Length measured in centimeters
      */
     private final int length;
+
+    private final int width;
 
     /**
      * The initial X coordinate of the object
@@ -18,13 +20,15 @@ public abstract class AbstractPositionable implements IPositionable {
     private double currentYCoordinate;
 
     /**
-     * @param x
-     * @param y
-     * @param length
+     * @param x The X coordinate
+     * @param y The Y coordinate
+     * @param length The length of the object
+     * @param width The width of the object
      */
 
-    public AbstractPositionable(int x, int y, int length) {
+    AbstractPositionable(int x, int y, int length, int width) {
         this.length = length;
+        this.width = width;
         this.currentXCoordinate = x;
         this.currentYCoordinate = y;
     }
@@ -48,6 +52,11 @@ public abstract class AbstractPositionable implements IPositionable {
     @Override
     public int getLength() {
         return length;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
     }
 
     @Override

@@ -1,4 +1,6 @@
-public interface IMoveable {
+package model;
+
+interface IMoveable extends IPositionable {
     /**
      * Moves the object in the correct direction.
      */

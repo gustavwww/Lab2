@@ -1,9 +1,10 @@
+package model;
+
 import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Stack;
 
-public class Carry implements ICarry{
+class Carry {
 
     /**
      * Stack of objects.
@@ -23,7 +24,7 @@ public class Carry implements ICarry{
      * @param maxObjects The maximum capacity of the carrier.
      * @param maxObjectLength The maximum length of the object.
      */
-    public Carry(int maxObjects, int maxObjectLength) {
+    Carry(int maxObjects, int maxObjectLength) {
 
         objects = new ArrayDeque<>();
         this.maxObjects = maxObjects;
