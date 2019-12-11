@@ -39,17 +39,18 @@ public class DrawPanel extends JPanel implements ModelListener {
         for (IVehicle vehicle : carC.model.vehicles) {
             g.drawImage(assets.getImageByCar(vehicle.getModelName()), (int) Math.round(vehicle.getCurrentXCoordinate()), (int) Math.round(vehicle.getCurrentYCoordinate()), null);
         }
-
     }
 
+    // Checks whether any vehicle is out of frame reporting to CarController
     private void checkVehiclesInFrame() {
         for (IVehicle vehicle : carC.model.vehicles) {
             if (!isVehicleInFrame(vehicle)) {
-                carC.vehicleOutOfBounds(vehicle);
+                carC.vehicleGotOutOfFrame(vehicle);
             }
         }
     }
 
+    // Checks whether a vehicle is in frame.
     private boolean isVehicleInFrame(IVehicle vehicle) {
         if ((!(vehicle.getCurrentXCoordinate() + vehicle.getLength() > getWidth()) && !(vehicle.getCurrentXCoordinate() < 0))) {
             return (!(vehicle.getCurrentYCoordinate() + vehicle.getWidth() > getHeight()) && !(vehicle.getCurrentYCoordinate() < 0));

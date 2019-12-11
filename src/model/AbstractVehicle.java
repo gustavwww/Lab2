@@ -47,7 +47,7 @@ abstract class AbstractVehicle extends AbstractMoveable implements IVehicle {
      * Stops the engine.
      * Set's the current speed to 0.
      */
-    public void stopEngine(){
+    public void stopEngine() {
         this.engineRunning = false;
         setCurrentSpeed(0);
     }
@@ -55,7 +55,8 @@ abstract class AbstractVehicle extends AbstractMoveable implements IVehicle {
      * Starts the engine.
      * Set's the current speed to 0.1.
      */
-    public void startEngine(){
+    public void startEngine() {
+        if (this.engineRunning) { return; }
         this.engineRunning = true;
         setCurrentSpeed(0.1);
     }

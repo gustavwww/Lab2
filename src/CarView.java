@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  * each of it's components.
  **/
 
-public class CarView extends JFrame{
+public class CarView extends JFrame {
     private static final int X = 800;
     private static final int Y = 800;
 
@@ -98,62 +98,16 @@ public class CarView extends JFrame{
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
         this.add(managerPanel);
-        
-        gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
-            }
-        });
 
-        brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.brake(gasAmount);
-            }
-        });
-
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.startAllCars();
-            }
-        });
-
-        stopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.stopAllCars();
-            }
-        });
-
-        turboOnButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.saabTurboOn();
-            }
-        });
-
-        turboOffButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.saabTurboOff();
-            }
-        });
-
-        liftBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.scaniaLiftBed();
-            }
-        });
-
-        lowerBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.scaniaLowerBed();
-            }
-        });
+        // ActionListeners
+        gasButton.addActionListener(e -> carC.gas(gasAmount));
+        brakeButton.addActionListener(e -> carC.brake(gasAmount));
+        startButton.addActionListener(e -> carC.startAllCars());
+        stopButton.addActionListener(e -> carC.stopAllCars());
+        turboOnButton.addActionListener(e -> carC.saabTurboOn());
+        turboOffButton.addActionListener(e -> carC.saabTurboOff());
+        liftBedButton.addActionListener(e -> carC.scaniaLiftBed());
+        lowerBedButton.addActionListener(e -> carC.scaniaLowerBed());
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

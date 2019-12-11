@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Random;
+
 public class VehicleFactory {
 
     private VehicleFactory() {}
@@ -14,6 +16,18 @@ public class VehicleFactory {
 
     public static IVehicle createScania(int x, int y) {
         return new Scania(x, y);
+    }
+
+    public static IVehicle createRandomVehicle(int x, int y) {
+        switch (new Random().nextInt(3)) {
+            case 0:
+                return new Volvo240(x, y);
+            case 1:
+                return new Saab95(x, y);
+            case 2:
+                return new Scania(x, y);
+        }
+        throw new Error();
     }
 
 }

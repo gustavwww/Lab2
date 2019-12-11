@@ -10,24 +10,12 @@ public class CarController {
     CarView view;
     CarModel model;
 
-    public CarController() {
-        this.model = new CarModel();
+    public CarController(CarModel model) {
+        this.model = model;
     }
 
     public void start() {
         model.startTimer();
-    }
-
-    public static void main(String[] args) {
-
-        CarController cc = new CarController();
-
-        // Start a new view and send a reference of self
-        CarView view = new CarView("CarSim 1.0", cc);
-        cc.view = view;
-
-        // Start the timer
-        cc.start();
     }
 
     // Calls the gas method for each car once
@@ -97,7 +85,7 @@ public class CarController {
         model.removeLastCar();
     }
 
-    void vehicleOutOfBounds(IVehicle vehicle) {
+    void vehicleGotOutOfFrame(IVehicle vehicle) {
         vehicle.turn180();
     }
 
