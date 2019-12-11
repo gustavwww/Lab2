@@ -13,7 +13,7 @@ class Volvo240 extends Car {
      * Constructor for model.Volvo240
      */
     Volvo240(int x, int y) {
-        super(x, y, 100, 60, 4, 100, Color.red, "model.Volvo240");
+        super(x, y, 100, 60, 4, 100, Color.red, "Volvo240");
     }
 
     @Override

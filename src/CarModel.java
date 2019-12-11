@@ -22,6 +22,14 @@ public class CarModel {
         vehicles.add(VehicleFactory.createScania(100, 300));
     }
 
+    public void addRandomCar() {
+
+    }
+
+    public void removeRandomCar() {
+
+    }
+
     public void startTimer() {
         timer.start();
     }

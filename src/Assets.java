@@ -33,10 +33,10 @@ public class Assets {
 
         switch (modelname) {
 
-            case "model.Volvo240":
+            case "Volvo240":
                 return volvoImage;
 
-            case "model.Saab95":
+            case "Saab95":
                 return saabImage;
 
             case "ScaniaR620":

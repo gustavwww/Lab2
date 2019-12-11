@@ -13,7 +13,7 @@ class Saab95 extends Car implements ITurbo {
      * Constructor for model.Saab95
      */
     Saab95(int x, int y) {
-        super(x, y, 100, 60, 2, 125, Color.BLACK, "model.Saab95");
+        super(x, y, 100, 60, 2, 125, Color.BLACK, "Saab95");
         this.turboOn = false;
     }
 

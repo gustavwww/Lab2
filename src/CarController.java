@@ -89,9 +89,16 @@ public class CarController {
         }
     }
 
+    void addCar() {
+        model.addRandomCar();
+    }
+
+    void removeCar() {
+        model.removeRandomCar();
+    }
+
     void vehicleOutOfBounds(IVehicle vehicle) {
         vehicle.turn180();
     }
-
 
 }

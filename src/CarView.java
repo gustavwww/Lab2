@@ -20,12 +20,16 @@ public class CarView extends JFrame{
     CarController carC;
 
     private DrawPanel drawPanel;
+    private InfoPanel infoPanel;
+    private ManagerPanel managerPanel;
 
     private int gasAmount = 0;
 
     public CarView(String framename, CarController cc){
         this.carC = cc;
         this.drawPanel = new DrawPanel(X, Y-240, cc);
+        this.infoPanel = new InfoPanel(X, 40, cc);
+        this.managerPanel = new ManagerPanel(X, 400, cc);
 
         initComponents(framename);
     }
@@ -43,8 +47,8 @@ public class CarView extends JFrame{
         JButton brakeButton = new JButton("Brake");
         JButton turboOnButton = new JButton("Saab Turbo on");
         JButton turboOffButton = new JButton("Saab Turbo off");
-        JButton liftBedButton = new JButton("model.Scania Raise Bed");
-        JButton lowerBedButton = new JButton("model.Scania Lower Bed");
+        JButton liftBedButton = new JButton("Scania Raise Bed");
+        JButton lowerBedButton = new JButton("Scania Lower Bed");
 
         JButton startButton = new JButton("Start all cars");
         JButton stopButton = new JButton("Stop all cars");
@@ -53,8 +57,8 @@ public class CarView extends JFrame{
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
+        this.add(infoPanel);
         this.add(drawPanel);
-
 
 
         SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
@@ -94,6 +98,7 @@ public class CarView extends JFrame{
         stopButton.setForeground(Color.black);
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
+        this.add(managerPanel);
 
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
