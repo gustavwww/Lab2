@@ -22,19 +22,9 @@ public class ManagerPanel extends JPanel {
         JButton addCarBtn = new JButton("Add Car");
         JButton removeCarBtn = new JButton("Remove Car");
 
-        addCarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                carC.addCar();
-            }
-        });
+        addCarBtn.addActionListener(e -> carC.addCar());
 
-        removeCarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                carC.removeCar();
-            }
-        });
+        removeCarBtn.addActionListener(e -> carC.removeCar());
 
         this.add(addCarBtn);
         this.add(removeCarBtn);
