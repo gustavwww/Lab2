@@ -94,7 +94,7 @@ public class CarController {
     }
 
     void removeCar() {
-        model.removeRandomCar();
+        model.removeLastCar();
     }
 
     void vehicleOutOfBounds(IVehicle vehicle) {

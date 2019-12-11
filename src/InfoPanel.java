@@ -25,6 +25,7 @@ public class InfoPanel extends JPanel implements ModelListener {
 
     private void setupLabel() {
         updateStatusLabel();
+        carStatusLabel.setForeground(Color.WHITE);
         this.add(carStatusLabel);
     }
 

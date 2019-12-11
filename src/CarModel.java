@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CarModel {
 
@@ -22,12 +23,33 @@ public class CarModel {
         vehicles.add(VehicleFactory.createScania(100, 300));
     }
 
+    //TODO: Clean up Model Class and these add/remove Car methods
     public void addRandomCar() {
+        if (vehicles.size() >= 10) {
+            return;
+        }
 
+        Random rand = new Random();
+        switch (rand.nextInt(3)) {
+
+            case 0:
+                vehicles.add(VehicleFactory.createVolvo240(100, 100*(vehicles.size() + 1)));
+                break;
+            case 1:
+                vehicles.add(VehicleFactory.createSaab95(100, 100*(vehicles.size() + 1)));
+                break;
+            case 2:
+                vehicles.add(VehicleFactory.createScania(100, 100*(vehicles.size() + 1)));
+                break;
+
+        }
     }
 
-    public void removeRandomCar() {
-
+    public void removeLastCar() {
+        if (vehicles.isEmpty()) {
+            return;
+        }
+        vehicles.remove(vehicles.size() - 1);
     }
 
     public void startTimer() {
@@ -38,8 +60,8 @@ public class CarModel {
         public void actionPerformed(ActionEvent e) {
             for (IVehicle vehicle : vehicles) {
                 vehicle.move();
-                notifyObservers();
             }
+            notifyObservers();
         }
     }
 
